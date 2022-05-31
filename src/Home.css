@@ -1,0 +1,29 @@
+.home {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1500px;
+}
+
+
+/* we are adding above cases so that our home does not go in the problem of maximum width  */
+
+.home__row {
+    display: flex;
+    z-index: 1;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+/* this is the row inside which we are adding our products and also we are adding the left and the right margin to show some spaces along side edges */
+
+.home__image {
+    width: 100%;
+    z-index: -1;
+    margin-bottom: -150px;
+    /* we are giving the margin bottom along with z index as -1 to put products on our home banner */
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    /* here it means go from color to trabsparent */
+}
