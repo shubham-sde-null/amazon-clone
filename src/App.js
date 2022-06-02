@@ -2,25 +2,26 @@ import "./App.css";
 import Header from "./Header";
 import Home from "./Home";
 import { Route, Routes } from "react-router-dom";
+import Checkout from "./Checkout";
 function App() {
   return (
     <div className="app">
+      <Header />
+      {/* here we are using header in every page so we are using outside of routes */}
       <Routes>
         <Route
           path="/"
           element={
             <>
-              <Header />
               <Home />
             </>
           }
         />
         <Route
-          path="/*"
+          path="/checkout"
           element={
             <>
-              <Header />
-              <h1>You Landed On Wrong Page Go Back To Website</h1>
+              <Checkout />
             </>
           }
         />

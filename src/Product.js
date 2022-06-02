@@ -1,6 +1,25 @@
 import React from "react";
 import "./Product.css";
-function Product({ title, image, price, rating }) {
+import { useStateValue } from "./StateProvider";
+function Product({ id, title, image, price, rating }) {
+  // const [state, dispatch] = useStateValue();
+  // we can get the basket value in state if we destructure it, which is shown below
+  const [{ basket }, dispatch] = useStateValue();
+  //here we have defined this(useStateValue) in stateprovider at the botttom and it is used to pull information from the data layer (One mistake I made that I brought the useStateValue method but forget to add () at the end of function name which made the output blank)
+  console.log(basket);
+  const addToBasket = () => {
+    //dispatch some action into the data layer
+    dispatch({
+      type: "ADD_TO_BASKET",
+      item: {
+        id: id,
+        title: title,
+        image: image,
+        price: price,
+        rating: rating,
+      },
+    });
+  };
   return (
     <div className="product">
       <div className="product__info">
@@ -20,7 +39,8 @@ function Product({ title, image, price, rating }) {
       </div>
       {/* till here we have product info i.e the name price and rating and below we are goinf to add image of product and the add to cart button */}
       <img src={image} alt="" />
-      <button>Add To Basket</button>
+      <button onClick={addToBasket}>Add To Basket</button>
+      {/* <button >Add To Basket</button> */}
     </div>
   );
 }

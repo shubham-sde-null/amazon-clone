@@ -4,13 +4,16 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
+import { initialState } from "./reducer";
+import reducer from "./reducer";
+import { StateProvider } from "./StateProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <React.StrictMode>
+    <StateProvider initialState={initialState} reducer={reducer}>
       <App />
-    </React.StrictMode>{" "}
+    </StateProvider>
+    {/* here initialState shows how the data layer looks like in the begining and reducer says how we are going to manipulate the data layer */}
   </BrowserRouter>
 );
 
