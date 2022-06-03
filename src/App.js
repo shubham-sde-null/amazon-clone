@@ -3,16 +3,47 @@ import Header from "./Header";
 import Home from "./Home";
 import { Route, Routes } from "react-router-dom";
 import Checkout from "./Checkout";
+import Login from "./Login";
+import { useEffect } from "react";
+import { auth } from "./firebase";
+import { useStateValue } from "./StateProvider";
 function App() {
+  const [{}, dispatch] = useStateValue();
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      console.log("The User Is>>>>", authUser);
+      if (authUser) {
+        //user just logged in/ the user was logged in
+        dispatch({
+          type: "SET_USER",
+          user: authUser,
+        });
+      } else {
+        //the user is logged out
+        dispatch({
+          type: "SET_USER",
+          user: null,
+        });
+      }
+    });
+  }, []);
   return (
     <div className="app">
-      <Header />
       {/* here we are using header in every page so we are using outside of routes */}
       <Routes>
+        <Route
+          path="/login"
+          element={
+            <>
+              <Login />
+            </>
+          }
+        />
         <Route
           path="/"
           element={
             <>
+              <Header />
               <Home />
             </>
           }
@@ -21,6 +52,7 @@ function App() {
           path="/checkout"
           element={
             <>
+              <Header />
               <Checkout />
             </>
           }
@@ -33,6 +65,7 @@ function App() {
           <Header />
           <h1>This is the checkout page</h1>
         </Route> */}
+        {/* I am not adding header at the gloabl instead i m adding it inside particular path because I don't want to show my header during login page */}
       </Routes>
     </div>
   );
